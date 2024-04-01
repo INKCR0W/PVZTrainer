@@ -60,6 +60,7 @@ namespace trainer {
 			Sleep(50);
 		}
 
+
 		if (!menu.init()) {
 			std::cerr << "³õÊ¼»¯Ê§°Ü" << std::endl;
 			system("pause");
