@@ -32,7 +32,7 @@ namespace trainer {
 		int _picked = 0;
 		int _type = 0;
 
-		for (int i = 0; i != 50; ++i) {
+		for (int i = 0; i != 10; ++i) {
 			memory::ADDRPOINT picked = reinterpret_cast<memory::ADDRPOINT>(first_col + i * 0xD8);
 			memory::ADDRPOINT type = reinterpret_cast<memory::ADDRPOINT>(first_col + 0x8 + i * 0xD8);
 			
