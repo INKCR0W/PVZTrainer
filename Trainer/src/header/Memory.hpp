@@ -37,6 +37,7 @@ namespace memory {
 
 		const map<wstring, ADDRPOINT>& module_map() const;
 		const ADDRPOINT addr(const wstring& module_name) const;
+		const DWORD pid() const;
 
 		const ADDRPOINT find_value_addr(const ValueOffset& value_offsets) const;
 		const ADDRPOINT find_object_addr(const ObjectOffset& object_offsets, const wstring& value_name) const;

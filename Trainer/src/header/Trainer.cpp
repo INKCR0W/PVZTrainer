@@ -1,5 +1,6 @@
 #include "Trainer.hpp"
 #include "Memory.hpp"
+#include "Menu.h"
 
 #include <iostream>
 
@@ -45,12 +46,51 @@ namespace trainer {
 	}
 
 	const bool Trainer::run() {
-		if (!is_gaming())
-			return false;
 
-		infinite_sun();
-		none_cd();
-		auto_collection();
+		menu::Menu menu({
+		"无限阳光",
+		"无CD",
+		"自动拾取",
+		"作者: INKCR0W",
+		});
+
+		std::cout << "初始化成功\n" << "进程PID：" << game.pid() << "\n进程基址：" << std::hex << std::uppercase << game.addr(L"PlantsVsZombies.exe") << "\n等待进入游戏\n\n\n\n" << std::endl;
+
+		while (!is_gaming()) {
+			Sleep(50);
+		}
+
+		if (!menu.init()) {
+			std::cerr << "初始化失败" << std::endl;
+			system("pause");
+			exit(0);
+		}
+
+		while (true) {
+			menu.listen();
+
+			if (!is_gaming())
+				continue;
+
+			if (menu.feature(0)) {
+				infinite_sun();
+			}
+
+			if (menu.feature(1)) {
+				none_cd();
+			}
+
+			if (menu.feature(2)) {
+				auto_collection();
+			}
+
+			if (menu.feature(3)) {
+				system("start https://github.com/INKCR0W/PVZTrainer");
+				menu.set_feature(3, false);
+			}
+
+			Sleep(10);
+		}
 		return true;
 	}
 }

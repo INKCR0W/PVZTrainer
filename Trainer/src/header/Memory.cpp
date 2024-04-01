@@ -18,33 +18,35 @@ namespace memory {
 		process_handle = get_process_handle(process_name);
 		if (process_handle == nullptr) {
 			cerr << "CAN NOT FOUND GAME PROCESS, ERROR: " << get_error(GetLastError()) << endl;
+			system("pause");
 			exit(0);
 		}
 
 		if (!update_module_list()) {
 			cerr << "CAN NOT UPDATE MODULE LIST, ERROR: " << get_error(GetLastError()) << endl;
+			system("pause");
 			exit(0);
 		}
 	}
 
-	Memory::~Memory()
-	{
+	Memory::~Memory() {
 		if (this->process_handle)
 			CloseHandle(this->process_handle);
 	}
 
-	const map<wstring, ADDRPOINT>& Memory::module_map() const
-	{
+	const map<wstring, ADDRPOINT>& Memory::module_map() const {
 		return module_list;
 	}
 
-	const ADDRPOINT Memory::addr(const wstring& module_name) const
-	{
+	const ADDRPOINT Memory::addr(const wstring& module_name) const {
 		return module_list.find(module_name)->second;
 	}
 
-	const ADDRPOINT Memory::find_value_addr(const ValueOffset& value_offsets) const
-	{
+	const DWORD Memory::pid() const {
+		return process_id;
+	}
+
+	const ADDRPOINT Memory::find_value_addr(const ValueOffset& value_offsets) const {
 #ifdef DEBUG  // DEBUG阶段行为，发布时跳过以提高运行效率
 		if (value_offsets.module() == L"") {
 			return nullptr;
@@ -75,8 +77,7 @@ namespace memory {
 		return nullptr;
 	}
 
-	const ADDRPOINT Memory::find_object_addr(const ObjectOffset& object_offsets, const wstring& value_name) const
-	{
+	const ADDRPOINT Memory::find_object_addr(const ObjectOffset& object_offsets, const wstring& value_name) const {
 #ifdef DEBUG  // DEBUG阶段行为，发布时跳过以提高运行效率
 		if (object_offsets.module() == L"") {
 			return nullptr;

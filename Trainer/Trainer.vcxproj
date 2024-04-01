@@ -84,6 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,6 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +139,7 @@
   <ItemGroup>
     <ClCompile Include="src\header\Error.cpp" />
     <ClCompile Include="src\header\Memory.cpp" />
+    <ClCompile Include="src\header\Menu.cpp" />
     <ClCompile Include="src\header\Offset.cpp" />
     <ClCompile Include="src\header\Trainer.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -144,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="src\header\Error.hpp" />
     <ClInclude Include="src\header\Memory.hpp" />
+    <ClInclude Include="src\header\Menu.h" />
     <ClInclude Include="src\header\Offset.hpp" />
     <ClInclude Include="src\header\Trainer.hpp" />
   </ItemGroup>
